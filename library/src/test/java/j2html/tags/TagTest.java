@@ -162,6 +162,61 @@ public class TagTest {
     }
 
     @Test
+    public void testAddClass() throws Exception {
+        String expected = "<div class=\"c1 c2 c3\"></div>";
+        String actual = div().addClass("c1").addClass("c2").addClass("c3").render();
+        assertThat(actual, is(expected));
+    }
+
+    @Test
+    public void testAddClassFollowedByWithClass() throws Exception {
+        String expected = "<div class=\"c4\"></div>";
+        String actual = div()
+            .addClass("c1")
+            .addClass("c2")
+            .addClass("c3")
+            .withClass("c4")
+            .render();
+        assertThat(actual, is(expected));
+    }
+
+    @Test
+    public void testWithClassFollowedByAddClass() throws Exception {
+        String expected = "<div class=\"c4 c1 c2 c3\"></div>";
+        String actual = div()
+            .withClass("c4")
+            .addClass("c1")
+            .addClass("c2")
+            .addClass("c3")
+            .render();
+        assertThat(actual, is(expected));
+    }
+
+    @Test
+    public void testAddClassFollowedByWithClasses() throws Exception {
+        String expected = "<div class=\"c4 c5\"></div>";
+        String actual = div()
+            .addClass("c1")
+            .addClass("c2")
+            .addClass("c3")
+            .withClasses("c4", "c5")
+            .render();
+        assertThat(actual, is(expected));
+    }
+
+    @Test
+    public void testWithClassesFollowedByAddClass() throws Exception {
+        String expected = "<div class=\"c4 c5 c1 c2 c3\"></div>";
+        String actual = div()
+            .withClasses("c4", "c5")
+            .addClass("c1")
+            .addClass("c2")
+            .addClass("c3")
+            .render();
+        assertThat(actual, is(expected));
+    }
+
+    @Test
     public void testEmptyAttribute() throws Exception {
         Tag testTagWithAttrValueNull = new ContainerTag("a").attr("attribute", null);
         assertThat(testTagWithAttrValueNull.render(), is("<a attribute></a>"));
