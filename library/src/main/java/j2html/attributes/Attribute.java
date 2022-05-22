@@ -5,6 +5,7 @@ import j2html.rendering.TagBuilder;
 import j2html.tags.Renderable;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class Attribute implements Renderable {
     private String name;
@@ -60,5 +61,18 @@ public class Attribute implements Renderable {
 
     public String getValue() {
         return value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Attribute)) return false;
+        Attribute attribute = (Attribute) o;
+        return Objects.equals(name, attribute.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

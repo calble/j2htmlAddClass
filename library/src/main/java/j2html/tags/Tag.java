@@ -3,15 +3,12 @@ package j2html.tags;
 import j2html.attributes.Attr;
 import j2html.attributes.Attribute;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 public abstract class Tag<T extends Tag<T>> extends DomContent implements IInstance<T> {
     private final String tagName;
     private final ArrayList<Attribute> attributes;
-    private final Attribute classAttr = new Attribute("class");
 
     protected Tag(String tagName) {
         this.tagName = tagName;
@@ -37,11 +34,6 @@ public abstract class Tag<T extends Tag<T>> extends DomContent implements IInsta
      * @param value the attribute value
      */
     boolean setAttribute(String name, String value) {
-        if(name.equals("class")){
-            classAttr.setValue(value);
-            return true;
-        }
-
         if (value == null) {
             return attributes.add(new Attribute(name));
         }
@@ -126,28 +118,30 @@ public abstract class Tag<T extends Tag<T>> extends DomContent implements IInsta
      * @return itself for easy chaining
      */
     public T withClasses(String... classes) {
-        classAttr.setValue(
-            Arrays.stream(classes)
-                .filter(Objects::nonNull)
-                .collect(Collectors.joining(" "))
-        );
-
-        return self();
+        StringBuilder sb = new StringBuilder();
+        for (String s : classes) {
+            sb.append(s != null ? s : "").append(" ");
+        }
+        return attr(Attr.CLASS, sb.toString().trim());
     }
 
     /**
      * Convenience method that append a class to current class value.
      *
-     * @param cls the class name to append to the class attribute.
+     * @param className the class name to append to the class attribute.
      * @return itself for easy chaining
      */
-    public T addClass(String cls){
-        if(classAttr.getValue() != null) {
-            classAttr.setValue(classAttr.getValue() + " " + cls);
-        }else{
-            classAttr.setValue(cls);
-        }
+    public T addClass(String className){
+        Optional<Attribute> tmp = attributes.stream()
+            .filter(attribute -> attribute.getName() != null && attribute.getName().equals(Attr.CLASS))
+            .findFirst();
 
+        if(tmp.isPresent()){
+            tmp.get().setValue(tmp.get().getValue() + " " + className);
+        }else{
+            //Add the class attribute to the front of the ArrayList so that future calls to addClass are faster.
+            attributes.add(0, new Attribute(Attr.CLASS, className));
+        }
         return self();
     }
 
@@ -229,12 +223,4 @@ public abstract class Tag<T extends Tag<T>> extends DomContent implements IInsta
     public T withCondTitle(boolean condition, String title) { return condAttr(condition, Attr.TITLE, title); }
 
     public T withCondTranslate(boolean condition){ return attr(Attr.TRANSLATE, (condition)?"yes":"no"); }
-
-    @Override
-    public String render() {
-        if(classAttr.getValue() != null && !classAttr.getValue().isEmpty() && !attributes.contains(classAttr)){
-            attributes.add(classAttr);
-        }
-        return super.render();
-    }
 }
