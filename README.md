@@ -1,27 +1,19 @@
-[![Workflow](https://github.com/tipsy/j2html/workflows/Test%20all%20JDKs%20on%20all%20OSes/badge.svg)](https://github.com/tipsy/j2html/actions)
-![](https://img.shields.io/github/license/tipsy/j2html.svg)
-![](https://img.shields.io/maven-central/v/com.j2html/j2html.svg)
+# j2html with addClass Methods
+This is a fork of the j2html library. In j2html the withClass and withClasses methods
+replace the existing class value of the tag.  This fork adds the following methods:
 
-# j2html
-Java to HTML generator. Enjoy typesafe HTML generation.
+* addClass
+* addClasses
+* condAddClass
 
-The project webpage is [j2html.com](http://j2html.com).
+This provides the functionality to add class names to tags without changing how the
+withClass, withClasses, and condWithClass methods work.
 
-## Getting started
-### Add the maven dependency
-```xml
-<dependency>
-    <groupId>com.j2html</groupId>
-    <artifactId>j2html</artifactId>
-    <version>1.5.0</version>
-</dependency>
-```
-### Or the gradle dependency
-```
-compile 'com.j2html:j2html:1.5.0'
-```
+## Using the Library
+To use this library download the Jar file in the release section.
 
-### Import TagCreator and start building HTML
+
+## Import TagCreator and start building HTML
 ```java
 import static j2html.TagCreator.*;
 
@@ -30,6 +22,8 @@ public class Main {
         body(
             h1("Hello, World!"),
             img().withSrc("/img/hello.png")
+                .addClass("c1")
+                .addClass("c2")
         ).render();
     }
 }
@@ -38,8 +32,7 @@ The above Java will result in the following HTML:
 ```html
 <body>
     <h1>Hello, World!</h1>
-    <img src="/img/hello.png">
+    <img src="/img/hello.png" class="c1 c2">
 </body>
 ```
 
-Find more examples at http://j2html.com/examples.html
