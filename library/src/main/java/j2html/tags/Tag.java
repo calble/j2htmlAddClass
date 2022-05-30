@@ -145,6 +145,19 @@ public abstract class Tag<T extends Tag<T>> extends DomContent implements IInsta
         return self();
     }
 
+    /**
+     * Convenience method that append a class to current class value if the condition parameter is true.
+     *
+     * @param className the class name to append to the class attribute.
+     * @return itself for easy chaining
+     */
+    public T condAddClass(boolean condition, String className){
+        if(condition){
+            addClass(className);
+        }
+        return self();
+    }
+
     /*
     Tag.java contains all Global Attributes, Attributes which are
     valid on all HTML Tags. Reference:
