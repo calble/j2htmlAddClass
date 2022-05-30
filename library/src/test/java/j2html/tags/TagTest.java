@@ -169,6 +169,18 @@ public class TagTest {
     }
 
     @Test
+    public void testCondAddClass() throws Exception {
+        String expected = "<div class=\"c1 c2\"></div>";
+        String actual = div()
+            .withClass("c1")
+            .condAddClass(5 == 5, "c2")
+            .condAddClass(1 != 1, "c3")
+            .render();
+
+        assertThat(actual, is(expected));
+    }
+
+    @Test
     public void testAddClassFollowedByWithClass() throws Exception {
         String expected = "<div class=\"c4\"></div>";
         String actual = div()

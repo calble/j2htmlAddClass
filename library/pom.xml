@@ -10,7 +10,7 @@
 
     <groupId>com.iconianet.java.j2html</groupId>
     <artifactId>j2html-add-class</artifactId>
-    <version>1.5.1-add-class</version>
+    <version>1.5.2-add-class</version>
 
     <name>j2html</name>
     <description>Java to HTML builder with a fluent API</description>
