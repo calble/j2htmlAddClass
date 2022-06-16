@@ -1,10 +1,8 @@
 package j2html.tags.specialized;
 
 import j2html.tags.ContainerTag;
+import j2html.tags.attributes.*;
 
-public final class HtmlTag extends ContainerTag<HtmlTag> {
-
-    public HtmlTag() {
-        super("html");
-    }
+public class HtmlTag extends ContainerTag<HtmlTag>  {
+public HtmlTag() {super("html");}
 }

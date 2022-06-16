@@ -11,7 +11,8 @@ public final class App
 {
     public static void main( String[] args )
     {
-        final Path relPath = Paths.get("../library/src/main/java/j2html/");
+        final Path basePath = Paths.get("");
+        final Path relPath = Paths.get( basePath.toAbsolutePath().toString(),"library/src/main/java/j2html/");
         final Path absPath = relPath.toAbsolutePath();
 
         System.out.println("writing in "+absPath);

@@ -122,7 +122,7 @@ public final class SpecializedTagClassCodeGenerator {
             sb.append("import ").append(importName).append(";\n");
         }
         sb.append("\n");
-        sb.append("public final class ")
+        sb.append("public class ")
             .append(className)
             .append(" ");
 

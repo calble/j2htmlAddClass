@@ -1,9 +1,8 @@
 package j2html.tags.specialized;
 
 import j2html.tags.ContainerTag;
+import j2html.tags.attributes.*;
 
-public final class PictureTag extends ContainerTag<PictureTag> {
-    public PictureTag() {
-        super("picture");
-    }
+public class PictureTag extends ContainerTag<PictureTag>  {
+public PictureTag() {super("picture");}
 }

@@ -1,9 +1,8 @@
 package j2html.tags.specialized;
 
 import j2html.tags.ContainerTag;
+import j2html.tags.attributes.*;
 
-public final class TitleTag extends ContainerTag<TitleTag> {
-    public TitleTag() {
-        super("title");
-    }
+public class TitleTag extends ContainerTag<TitleTag>  {
+public TitleTag() {super("title");}
 }

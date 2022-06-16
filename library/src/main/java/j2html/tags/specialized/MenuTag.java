@@ -1,11 +1,9 @@
 package j2html.tags.specialized;
 
 import j2html.tags.ContainerTag;
-import j2html.tags.attributes.IType;
+import j2html.tags.attributes.*;
 
-public final class MenuTag extends ContainerTag<MenuTag>
-    implements IType<MenuTag> {
-    public MenuTag() {
-        super("menu");
-    }
+public class MenuTag extends ContainerTag<MenuTag> 
+implements IType<MenuTag> {
+public MenuTag() {super("menu");}
 }

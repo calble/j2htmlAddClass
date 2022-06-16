@@ -1,9 +1,8 @@
 package j2html.tags.specialized;
 
 import j2html.tags.ContainerTag;
+import j2html.tags.attributes.*;
 
-public final class PTag extends ContainerTag<PTag> {
-    public PTag() {
-        super("p");
-    }
+public class PTag extends ContainerTag<PTag>  {
+public PTag() {super("p");}
 }
